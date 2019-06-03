@@ -1,27 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
+import firebase from './Firebase.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          TEST 1234
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="test"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props)
+  {
+    super(props);
+    this.state={
+      test: [],
+    }
+  }
+  componentDidMount() {
+    const ref = firebase.database().ref('users');
+    ref.on('value', (snapshot)=>{
+      let test = [];
+      snapshot.forEach(item => {
+        test.push(item);
+      });
+      this.setState({
+        test:test
+      })
+    })
+  }
+  render() {
+    return (
+        <div>
+          {this.state.test.map((item)=>
+              <div key={item.key}>
+              <ul>
+                <li>
+                  {item.val().name}
+                </li>
+              </ul>
+              </div>
+                )}
+        </div>
+    );
+  }
 }
-
-export default App;
+export default App

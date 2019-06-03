@@ -1,17 +1,16 @@
 import * as firebase from 'firebase';
 
-const settings = {timestampsInSnapshots: true};
 
 const config = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    databaseURL: "YOUR_DATABASE_URL",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_ID"
+    apiKey: "AIzaSyAMrJXLEPTlkQWkLg5xkOcZWLnGPee4rd4",
+    authDomain: "daka-89e89.firebaseapp.com",
+    databaseURL: "https://daka-89e89.firebaseio.com",
+    projectId: "daka-89e89",
+    storageBucket: "daka-89e89.appspot.com",
+    messagingSenderId: "772953289424",
+    appId: "1:772953289424:web:17445dc8739c3dab"
 };
 firebase.initializeApp(config);
 
-firebase.firestore().settings(settings);
 
 export default firebase;
