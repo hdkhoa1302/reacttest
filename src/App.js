@@ -2,7 +2,7 @@ import React from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import firebase from './Firebase.js';
-
+import { Alert } from 'bootstrap-4-react';
 class App extends React.Component {
   constructor(props)
   {
@@ -23,18 +23,27 @@ class App extends React.Component {
       })
     })
   }
+  delete = (uid) => {
+    const ref = firebase.database().ref('users');
+    ref.child(uid).remove()
+  };
   render() {
     return (
-        <div>
+        <div className="container">
           {this.state.test.map((item)=>
               <div key={item.key}>
-              <ul>
-                <li>
-                  {item.val().name}
-                </li>
-              </ul>
+                <table className="table table-hover d-xl-table table-sm">
+                  <tr className="alert-dismissible">
+                    <td className="col">
+                      {item.val().name}
+                    </td>
+                    <td>
+                    <button className="btn btn-sm btn-danger" onClick={()=>{this.delete(item.key)}}>x</button>
+                    </td>
+                  </tr>
+                </table>
               </div>
-                )}
+          )}
         </div>
     );
   }
